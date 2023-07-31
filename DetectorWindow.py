@@ -95,9 +95,35 @@ class Detector(MyWindow.Ui_MainWindow):
 
     def continousAcquistionStart(self):
         self.textBrowser_tab1.append('开始连续 采集连接成功')
+        self.cam.stream_on()
+        while True:
+            try:
+                # 从相机数据流中获取数据
+                raw_image = self.cam.data_stream[0].get_image()
+                if raw_image is None:
+                    print("图像获取失败\n")
+                    continue
+                # 将原始图像数据转换为OpenCV格式
+                numpy_image = raw_image.get_numpy_array()
+                if numpy_image is None:
+                    continue
+
+                '''显示图像存在问题，其他都ok了'''
+                # 将图像调整为与标签大小相同
+                scaled_image = cv2.resize(numpy_image, (self.labelCamera1.width(), self.labelCamera1.height()))
+                height, width= scaled_image.shape
+                bytes_per_line = 3 * width
+                qt_image = QtGui.QImage(scaled_image.data, width, height, bytes_per_line, QtGui.QImage.Format.Format_Grayscale8)
+                # 在标签上显示图像
+                self.labelCamera1.setPixmap(QtGui.QPixmap.fromImage(qt_image))
+                # 让Qt程序有时间进行界面刷新
+                QtWidgets.QApplication.processEvents()
+            except KeyboardInterrupt:
+                self.cam.stream_off()
+                break
     def continousAcquistionStop(self):
         self.textBrowser_tab1.append('停止连续采集连接成功')
-
+        self.is_continuous_acquisition = False  # 设置退出循环条件
 
 
 
