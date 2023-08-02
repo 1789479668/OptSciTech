@@ -112,7 +112,8 @@ class Detector(MyWindow.Ui_MainWindow):
                 # 将图像调整为与标签大小相同
                 scaled_image = cv2.resize(numpy_image, (self.labelCamera1.width(), self.labelCamera1.height()))
                 height, width= scaled_image.shape
-                bytes_per_line = 3 * width
+                # 对于灰度图像，每行的字节数就等于图像的宽度（width），因为每个像素只有一个灰度值，不需要乘以通道数。
+                bytes_per_line = width
                 qt_image = QtGui.QImage(scaled_image.data, width, height, bytes_per_line, QtGui.QImage.Format.Format_Grayscale8)
                 # 在标签上显示图像
                 self.labelCamera1.setPixmap(QtGui.QPixmap.fromImage(qt_image))

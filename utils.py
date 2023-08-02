@@ -107,10 +107,10 @@ def getimage(*args):
                 continue
 
             # # 展示实时图像(不去显示，否则耗时耗时太多会丢帧)
-            # cv2.imshow("实时图像", numpy_image)
+            cv2.imshow("实时图像", numpy_image)
             # 按下'q'键退出循环
-            solutions = sortpeaks(numpy_image)
-            print(f'x={solutions}')
+            # solutions = sortpeaks(numpy_image)
+            # print(f'x={solutions}')
             if cv2.waitKey(1) & 0xFF == ord('q'):
                 break
 
@@ -124,4 +124,3 @@ def getimage(*args):
         print("结束图像获取，且关闭相机完毕")
         print("-------------------------------------------------------------")
         cv2.destroyAllWindows()
-
