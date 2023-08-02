@@ -96,6 +96,7 @@ class Detector(MyWindow.Ui_MainWindow):
     def continousAcquistionStart(self):
         self.textBrowser_tab1.append('开始连续 采集连接成功')
         self.cam.stream_on()
+        # test
         while True:
             try:
                 # 从相机数据流中获取数据
