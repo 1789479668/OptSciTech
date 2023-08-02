@@ -1,5 +1,4 @@
 import io
-import time
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 import sys
@@ -7,11 +6,9 @@ import cv2
 from scipy.signal import find_peaks
 from scipy.optimize import fsolve
 import gxipy as gx
-import sympy as sp
 import numpy as np
 import matplotlib.pyplot as plt
 import MyWindow
-import utils
 
 
 class Detector(MyWindow.Ui_MainWindow):
@@ -23,7 +20,7 @@ class Detector(MyWindow.Ui_MainWindow):
         self.setupUi(MainWindow)
         self.retranslateUi(MainWindow)
         self.acquisitionloop = False    # 初始化采集循环控制
-        self.mode1loop = False  # 初始化连续采集控制
+        # self.mode1loop = False  # 初始化连续采集控制
 
         self.function()
 
@@ -211,7 +208,7 @@ class Detector(MyWindow.Ui_MainWindow):
         solution = fsolve(equation,50.0)
         format_solution = "{:.2f}".format(solution[0])
         self.lineEditAC_tab1_1.setText(str(format_solution))
-        self.textBrowser_tab1.append(f"峰值比:{format_solution}")
+        self.textBrowser_tab1.append(f"峰值比:{format_solution}\n")
 
 if __name__ == '__main__':
     #获取UIC窗口操作权限
