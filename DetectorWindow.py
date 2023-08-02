@@ -1,3 +1,4 @@
+import io
 import time
 
 from PyQt5 import QtCore, QtGui, QtWidgets
@@ -155,32 +156,54 @@ class Detector(MyWindow.Ui_MainWindow):
         y = cv2.GaussianBlur(y ,(3,3) ,3)
         # 转置为行向量
         y = np.transpose(y)
+        # 将二维数组转为一维数组
         y = y.ravel()
+
+        # 画光谱图
+        plt.figure(figsize=(4.27,3.41))
+        plt.plot(y)
+        # 获取绘制的图像，并转换为 QImage
+        buf = io.BytesIO()
+        plt.savefig(buf, format='png',dpi=100)
+        plt.close()
+        buf.seek(0)
+        img = QtGui.QImage.fromData(buf.getvalue())
+
+        # 将图像显示在 QLabel 中
+        pixmap = QtGui.QPixmap.fromImage(img)
+        self.labelSpectrum1.setPixmap(pixmap)
 
         # 找峰值
         peakloc, _ = find_peaks(y ,height=8 ,distance= 50)
-        if len(peakloc) < 2:
-            print('只有一个水峰')
-
         while len(peakloc) > 2:
             minValue = min(y[peakloc])
             minIndex = np.where(y[peakloc]==minValue)
             peakloc = np.delete(peakloc, minIndex)
-
+        # 此时使用单峰算法
+        if len(peakloc) < 2:
+            self.textBrowser_tab1.append("此时只有一个水峰\n")
+            return
         # 酒精峰，靠近405的那个(根据当前摆放在右侧)
         # 此时获取的是一个元素，而不是数值
         peak_a = y[peakloc[1]]
         # 水峰
         peak_w = y[peakloc[0]]
+        if abs(peak_w) < 1e-10:  # 使用很小的阈值来判断 peak_w 是否接近于零
+            self.textBrowser_tab1.append("警告：水峰的值接近于零，无法进行除法计算\n")
+            self.lineEditPR_tab1_1.setText('存在错误')
+            self.lineEditAC_tab1_1.setText('存在错误')
+            return
         try:
             bizhi = peak_a / peak_w
             # 只保留后四位
             format_bizhi = "{:.4f}".format(bizhi)
             self.lineEditPR_tab1_1.setText(str(format_bizhi))
         except ZeroDivisionError:
-            # 在这里处理捕获到的 ZeroDivisionError 异常
-            print("除数不能为零，跳过该段代码")
-            self.lineEditPR_tab1_1.setText('显示错误')
+            # 在这里处理捕获到的 ZeroDivisionError 异常,有备无患
+            self.textBrowser_tab1.append("警告：水峰的值接近于零，无法进行除法计算\n")
+            self.lineEditPR_tab1_1.setText('存在错误')
+            self.lineEditAC_tab1_1.setText('存在错误')
+            return
         # 根据bizhi进行计算,定义计算式
         def equation(x):
             return 0.4336*np.exp(0.0229*x)-bizhi
