@@ -3,7 +3,8 @@ import time
 from PyQt5 import QtCore, QtGui, QtWidgets
 import sys
 import cv2
-import scipy.signal
+from scipy.signal import find_peaks
+from scipy.optimize import fsolve
 import gxipy as gx
 import sympy as sp
 import numpy as np
@@ -20,7 +21,8 @@ class Detector(MyWindow.Ui_MainWindow):
         # 在Detector类中调用，来初始化主窗口，使Detector获得MyWindow.Ui_MainWindow类的属性
         self.setupUi(MainWindow)
         self.retranslateUi(MainWindow)
-
+        self.acquisitionloop = False    # 初始化采集循环控制
+        self.mode1loop = False  # 初始化连续采集控制
 
         self.function()
 
@@ -36,13 +38,15 @@ class Detector(MyWindow.Ui_MainWindow):
         '''相机参数设置部分'''
         self.lineEditExposureTime.editingFinished.connect(self.changeexposuretime)
 
-        '''连续采集'''
-        # 获取连续采集，采集图像按钮
+        '''图像获取'''
+        # 采集图像按钮
         self.pushButtonGetimage_tab1_1.clicked.connect(self.continuousAcquisition)
-        # 连续采集，停止采集图片
+        # 停止采集图片
         self.pushButtonGetimageStop_tab1_1.clicked.connect(self.continuousAcquisitionStop)
+
+        '''连续采集'''
         # 开始接受图片并进行图像处理并展示图片
-        # 开始
+        self.pushButtonStart_tab1_1.clicked.connect(self.mode1_Start)
 
 
 
@@ -108,13 +112,13 @@ class Detector(MyWindow.Ui_MainWindow):
                     print("图像获取失败\n")
                     continue
                 # 将原始图像数据转换为OpenCV格式
-                numpy_image = raw_image.get_numpy_array()
-                if numpy_image is None:
+                self.numpy_image = raw_image.get_numpy_array()
+                if self.numpy_image is None:
                     continue
 
                 '''显示图像存在问题，其他都ok了'''
                 # 将图像调整为与标签大小相同
-                scaled_image = cv2.resize(numpy_image, (self.labelCamera1.width(), self.labelCamera1.height()))
+                scaled_image = cv2.resize(self.numpy_image, (self.labelCamera1.width(), self.labelCamera1.height()))
                 height, width= scaled_image.shape
                 # 对于灰度图像，每行的字节数就等于图像的宽度（width），因为每个像素只有一个灰度值，不需要乘以通道数。
                 bytes_per_line = width
@@ -130,7 +134,59 @@ class Detector(MyWindow.Ui_MainWindow):
         self.acquisitionloop = False  # 设置退出循环条件
         self.textBrowser_tab1.append('停止采集图像')
 
+    def mode1_Start(self):
+        # self.textBrowser_tab1.append('这是连续采集模式处理函数')
+        # 如果
+        if self.acquisitionloop is False:
+            self.textBrowser_tab1.append("未获取到图像！\n")
+            return
+        # 如果没有获取图像，那么直接调取会报错,加入循环的话，运算量太大，导致程序崩溃
+        # self.mode1loop = True
+        # while self.mode1loop:
+        #     image = self.numpy_image
+        #     self.sortpeaks(image)
+        image = self.numpy_image
+        self.sortpeaks(image)
 
+    def sortpeaks(self,image):
+        # self.textBrowser_tab1.append('这是峰值处理函数')
+        # 积分求平均并高斯滤波
+        y = np.mean(image[400:801], axis=0)
+        y = cv2.GaussianBlur(y ,(3,3) ,3)
+        # 转置为行向量
+        y = np.transpose(y)
+        y = y.ravel()
+
+        # 找峰值
+        peakloc, _ = find_peaks(y ,height=8 ,distance= 50)
+        if len(peakloc) < 2:
+            print('只有一个水峰')
+
+        while len(peakloc) > 2:
+            minValue = min(y[peakloc])
+            minIndex = np.where(y[peakloc]==minValue)
+            peakloc = np.delete(peakloc, minIndex)
+
+        # 酒精峰，靠近405的那个(根据当前摆放在右侧)
+        # 此时获取的是一个元素，而不是数值
+        peak_a = y[peakloc[1]]
+        # 水峰
+        peak_w = y[peakloc[0]]
+        try:
+            bizhi = peak_a / peak_w
+            # 只保留后四位
+            format_bizhi = "{:.4f}".format(bizhi)
+            self.lineEditPR_tab1_1.setText(str(format_bizhi))
+        except ZeroDivisionError:
+            # 在这里处理捕获到的 ZeroDivisionError 异常
+            print("除数不能为零，跳过该段代码")
+            self.lineEditPR_tab1_1.setText('显示错误')
+        # 根据bizhi进行计算,定义计算式
+        def equation(x):
+            return 0.4336*np.exp(0.0229*x)-bizhi
+        solution = fsolve(equation,50.0)
+        format_solution = "{:.2f}".format(solution[0])
+        self.lineEditAC_tab1_1.setText(str(format_solution))
 
 if __name__ == '__main__':
     #获取UIC窗口操作权限
