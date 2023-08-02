@@ -198,6 +198,7 @@ class Detector(MyWindow.Ui_MainWindow):
             # 只保留后四位
             format_bizhi = "{:.4f}".format(bizhi)
             self.lineEditPR_tab1_1.setText(str(format_bizhi))
+            self.textBrowser_tab1.append(f"峰值比:{format_bizhi}")
         except ZeroDivisionError:
             # 在这里处理捕获到的 ZeroDivisionError 异常,有备无患
             self.textBrowser_tab1.append("警告：水峰的值接近于零，无法进行除法计算\n")
@@ -210,6 +211,7 @@ class Detector(MyWindow.Ui_MainWindow):
         solution = fsolve(equation,50.0)
         format_solution = "{:.2f}".format(solution[0])
         self.lineEditAC_tab1_1.setText(str(format_solution))
+        self.textBrowser_tab1.append(f"峰值比:{format_solution}")
 
 if __name__ == '__main__':
     #获取UIC窗口操作权限
