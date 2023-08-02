@@ -38,9 +38,9 @@ class Detector(MyWindow.Ui_MainWindow):
 
         '''连续采集'''
         # 获取连续采集，采集图像按钮
-        self.pushButtonGetimage_tab1_1.clicked.connect(self.continousAcquisition)
+        self.pushButtonGetimage_tab1_1.clicked.connect(self.continuousAcquisition)
         # 连续采集，停止采集图片
-        self.pushButtonGetimageStop_tab1_1.clicked.connect(self.continousAcquisitionStop)
+        self.pushButtonGetimageStop_tab1_1.clicked.connect(self.continuousAcquisitionStop)
         # 开始接受图片并进行图像处理并展示图片
         # 开始
 
@@ -52,6 +52,9 @@ class Detector(MyWindow.Ui_MainWindow):
 
     #相机导入函数
     def opencamera(self):
+        if hasattr(self, 'cam') and self.cam is not None:
+            self.textBrowser_tab1.append("相机设备已经被打开!\n")
+            return
         # 输出获取图片的初始化信息
         self.textBrowser_tab1.append('====================')
         self.textBrowser_tab1.append('正在调用相机,初始化中...')
@@ -66,10 +69,9 @@ class Detector(MyWindow.Ui_MainWindow):
             return 0
 
         # 当没有相机设备时，return之后的代码不会运行，即下列代码不会运行。
+        # 检测是否打开了设备
         str_index = self.dev_info_list[0].get("index")  # 获取设备基本信息列表
         self.cam = self.device_manager.open_device_by_index(str_index)  # 打开设备
-        # 检测是否以及打开设备，并进行输出
-
         # 默认触发方式为连续采集，设置默认曝光时间为10000us，增益0
         self.cam.TriggerMode.set(gx.GxSwitchEntry.OFF)
         self.cam.ExposureTime.set(10000)  # 默认曝光时间10000us
@@ -90,13 +92,12 @@ class Detector(MyWindow.Ui_MainWindow):
         # 报错原因是在opencamera中，对self.cam的赋值出现了问题，赋值的是一个局部变量。
 
     # 连续采集部分
-    def continousAcquisition(self):
+    def continuousAcquisition(self):
         # 触发方式为连续采集
         self.cam.TriggerMode.set(gx.GxSwitchEntry.OFF)
-        self.textBrowser_tab1.append('更改为连续采集模式')
-        self.continousAcquisitionStart()
-
-    def continousAcquisitionStart(self):
+        self.textBrowser_tab1.append('开始采集图像')
+        self.continuousAcquisitionStart()
+    def continuousAcquisitionStart(self):
         self.cam.stream_on()
         self.acquisitionloop = True
         while self.acquisitionloop:
@@ -125,9 +126,9 @@ class Detector(MyWindow.Ui_MainWindow):
             except KeyboardInterrupt:
                 self.cam.stream_off()
                 break
-    def continousAcquisitionStop(self):
+    def continuousAcquisitionStop(self):
         self.acquisitionloop = False  # 设置退出循环条件
-        self.textBrowser_tab1.append('停止连续采集连接成功')
+        self.textBrowser_tab1.append('停止采集图像')
 
 
 
