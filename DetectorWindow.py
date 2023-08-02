@@ -38,11 +38,14 @@ class Detector(MyWindow.Ui_MainWindow):
 
         '''连续采集'''
         # 获取连续采集，采集图像按钮
-        self.pushButtonGetimage_tab1_1.clicked.connect(self.continousAcquistion)
-        # 连续采集，开始采集图片并处理
-        self.pushButtonStart_tab1_1.clicked.connect(self.continousAcquistionStart)
-        # 连续采集，停止采集图片并处理
-        self.pushButtonStop_tab1_1.clicked.connect(self.continousAcquistionStop)
+        self.pushButtonGetimage_tab1_1.clicked.connect(self.continousAcquisition)
+        # 连续采集，停止采集图片
+        self.pushButtonGetimageStop_tab1_1.clicked.connect(self.continousAcquisitionStop)
+        # 开始接受图片并进行图像处理并展示图片
+        # 开始
+
+
+
         '''单次采集'''
 
         '''自定义采集'''
@@ -87,17 +90,16 @@ class Detector(MyWindow.Ui_MainWindow):
         # 报错原因是在opencamera中，对self.cam的赋值出现了问题，赋值的是一个局部变量。
 
     # 连续采集部分
-    def continousAcquistion(self):
+    def continousAcquisition(self):
         # 触发方式为连续采集
         self.cam.TriggerMode.set(gx.GxSwitchEntry.OFF)
         self.textBrowser_tab1.append('更改为连续采集模式')
+        self.continousAcquisitionStart()
 
-
-    def continousAcquistionStart(self):
-        self.textBrowser_tab1.append('开始连续 采集连接成功')
+    def continousAcquisitionStart(self):
         self.cam.stream_on()
-        # test
-        while True:
+        self.acquisitionloop = True
+        while self.acquisitionloop:
             try:
                 # 从相机数据流中获取数据
                 raw_image = self.cam.data_stream[0].get_image()
@@ -123,9 +125,9 @@ class Detector(MyWindow.Ui_MainWindow):
             except KeyboardInterrupt:
                 self.cam.stream_off()
                 break
-    def continousAcquistionStop(self):
+    def continousAcquisitionStop(self):
+        self.acquisitionloop = False  # 设置退出循环条件
         self.textBrowser_tab1.append('停止连续采集连接成功')
-        self.is_continuous_acquisition = False  # 设置退出循环条件
 
 
 
