@@ -1,6 +1,6 @@
 import io
 
-from PyQt5 import QtGui, QtWidgets
+from PyQt5 import QtGui, QtWidgets, QtCore
 import sys
 import cv2
 from scipy.signal import find_peaks

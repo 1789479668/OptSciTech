@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1024</width>
-    <height>720</height>
+    <width>1025</width>
+    <height>740</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,12 +19,24 @@
      <rect>
       <x>20</x>
       <y>20</y>
-      <width>1000</width>
-      <height>690</height>
+      <width>981</width>
+      <height>691</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <family>微软雅黑</family>
+      <pointsize>14</pointsize>
+      <weight>50</weight>
+      <italic>false</italic>
+      <bold>false</bold>
+     </font>
+    </property>
     <property name="styleSheet">
-     <string notr="true">font: 10pt &quot;微软雅黑&quot;;</string>
+     <string notr="true">font: 14pt &quot;微软雅黑&quot;;</string>
+    </property>
+    <property name="tabShape">
+     <enum>QTabWidget::Triangular</enum>
     </property>
     <property name="currentIndex">
      <number>0</number>
@@ -39,14 +51,27 @@
      <widget class="QTabWidget" name="tabWidget2">
       <property name="geometry">
        <rect>
-        <x>10</x>
+        <x>-3</x>
         <y>0</y>
         <width>950</width>
-        <height>640</height>
+        <height>651</height>
        </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">font: 14pt &quot;微软雅黑&quot;;
+</string>
+      </property>
+      <property name="tabShape">
+       <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
        <number>0</number>
+      </property>
+      <property name="elideMode">
+       <enum>Qt::ElideNone</enum>
+      </property>
+      <property name="usesScrollButtons">
+       <bool>true</bool>
       </property>
       <widget class="QWidget" name="tab1_1">
        <attribute name="title">
@@ -56,13 +81,13 @@
         <property name="geometry">
          <rect>
           <x>210</x>
-          <y>250</y>
-          <width>72</width>
-          <height>21</height>
+          <y>220</y>
+          <width>101</width>
+          <height>41</height>
          </rect>
         </property>
         <property name="styleSheet">
-         <string notr="true">font: 10pt &quot;微软雅黑&quot;;</string>
+         <string notr="true">font: 14pt &quot;微软雅黑&quot;;</string>
         </property>
         <property name="text">
          <string>相机图像</string>
@@ -72,13 +97,13 @@
         <property name="geometry">
          <rect>
           <x>670</x>
-          <y>250</y>
-          <width>72</width>
-          <height>21</height>
+          <y>220</y>
+          <width>101</width>
+          <height>41</height>
          </rect>
         </property>
         <property name="styleSheet">
-         <string notr="true">font: 10pt &quot;微软雅黑&quot;;</string>
+         <string notr="true">font: 14pt &quot;微软雅黑&quot;;</string>
         </property>
         <property name="text">
          <string>光谱图像</string>
@@ -103,7 +128,7 @@
          <property name="geometry">
           <rect>
            <x>0</x>
-           <y>0</y>
+           <y>-10</y>
            <width>427</width>
            <height>342</height>
           </rect>
@@ -116,11 +141,14 @@
        <widget class="QPushButton" name="pushButtonStart_tab1_1">
         <property name="geometry">
          <rect>
-          <x>50</x>
+          <x>40</x>
           <y>100</y>
-          <width>100</width>
-          <height>60</height>
+          <width>150</width>
+          <height>80</height>
          </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">font: 14pt &quot;微软雅黑&quot;;</string>
         </property>
         <property name="text">
          <string>开始采集</string>
@@ -129,11 +157,14 @@
        <widget class="QLabel" name="labelPR_tab1_1">
         <property name="geometry">
          <rect>
-          <x>250</x>
+          <x>220</x>
           <y>80</y>
-          <width>81</width>
-          <height>41</height>
+          <width>101</width>
+          <height>31</height>
          </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">font: 14pt &quot;微软雅黑&quot;;</string>
         </property>
         <property name="text">
          <string>峰值比</string>
@@ -142,11 +173,14 @@
        <widget class="QLabel" name="labelAC_tab1_1">
         <property name="geometry">
          <rect>
-          <x>250</x>
+          <x>220</x>
           <y>150</y>
-          <width>81</width>
+          <width>101</width>
           <height>41</height>
          </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">font: 14pt &quot;微软雅黑&quot;;</string>
         </property>
         <property name="text">
          <string>酒精度数</string>
@@ -156,9 +190,9 @@
         <property name="geometry">
          <rect>
           <x>350</x>
-          <y>85</y>
+          <y>80</y>
           <width>100</width>
-          <height>30</height>
+          <height>40</height>
          </rect>
         </property>
        </widget>
@@ -168,23 +202,86 @@
           <x>350</x>
           <y>150</y>
           <width>100</width>
-          <height>30</height>
+          <height>40</height>
          </rect>
         </property>
        </widget>
        <widget class="QLabel" name="labelTB_tab1_1">
         <property name="geometry">
          <rect>
-          <x>680</x>
-          <y>10</y>
-          <width>72</width>
-          <height>15</height>
+          <x>660</x>
+          <y>3</y>
+          <width>101</width>
+          <height>41</height>
          </rect>
         </property>
         <property name="text">
          <string>消息栏</string>
         </property>
        </widget>
+       <widget class="QLabel" name="labelCamera1">
+        <property name="geometry">
+         <rect>
+          <x>40</x>
+          <y>260</y>
+          <width>427</width>
+          <height>342</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_7">
+        <property name="geometry">
+         <rect>
+          <x>40</x>
+          <y>260</y>
+          <width>431</width>
+          <height>341</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap>picture/line.png</pixmap>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_8">
+        <property name="geometry">
+         <rect>
+          <x>490</x>
+          <y>260</y>
+          <width>431</width>
+          <height>341</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap>picture/line.png</pixmap>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <zorder>label_8</zorder>
+       <zorder>labelCamera1</zorder>
+       <zorder>label_7</zorder>
+       <zorder>labelCamera_tab1_1</zorder>
+       <zorder>labelSpectrum_tab1_1</zorder>
+       <zorder>frameSpectrum_tab1_1</zorder>
+       <zorder>pushButtonStart_tab1_1</zorder>
+       <zorder>labelPR_tab1_1</zorder>
+       <zorder>labelAC_tab1_1</zorder>
+       <zorder>lineEditPR_tab1_1</zorder>
+       <zorder>lineEditAC_tab1_1</zorder>
+       <zorder>labelTB_tab1_1</zorder>
       </widget>
       <widget class="QWidget" name="tab1_2">
        <attribute name="title">
@@ -194,32 +291,32 @@
         <property name="geometry">
          <rect>
           <x>670</x>
-          <y>250</y>
-          <width>72</width>
-          <height>21</height>
+          <y>220</y>
+          <width>101</width>
+          <height>41</height>
          </rect>
         </property>
         <property name="styleSheet">
          <string notr="true">font: 10pt &quot;微软雅黑&quot;;</string>
         </property>
         <property name="text">
-         <string>光谱图像</string>
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;光谱图像&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
        </widget>
        <widget class="QLabel" name="labelCamera_tab1_2">
         <property name="geometry">
          <rect>
           <x>210</x>
-          <y>250</y>
-          <width>72</width>
-          <height>21</height>
+          <y>220</y>
+          <width>101</width>
+          <height>41</height>
          </rect>
         </property>
         <property name="styleSheet">
          <string notr="true">font: 10pt &quot;微软雅黑&quot;;</string>
         </property>
         <property name="text">
-         <string>相机图像</string>
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;相机图像&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
        </widget>
        <widget class="QFrame" name="frameSpectrum_tab1_2">
@@ -241,7 +338,7 @@
          <property name="geometry">
           <rect>
            <x>0</x>
-           <y>0</y>
+           <y>-10</y>
            <width>427</width>
            <height>342</height>
           </rect>
@@ -254,11 +351,23 @@
        <widget class="QPushButton" name="pushButtonStart_tab1_2">
         <property name="geometry">
          <rect>
-          <x>50</x>
-          <y>100</y>
-          <width>100</width>
-          <height>60</height>
+          <x>40</x>
+          <y>90</y>
+          <width>150</width>
+          <height>80</height>
          </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>微软雅黑</family>
+          <pointsize>14</pointsize>
+          <weight>50</weight>
+          <italic>false</italic>
+          <bold>false</bold>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">font: 14pt &quot;微软雅黑&quot;;</string>
         </property>
         <property name="text">
          <string>开始采集</string>
@@ -267,11 +376,14 @@
        <widget class="QLabel" name="labelTB_tab1_2">
         <property name="geometry">
          <rect>
-          <x>680</x>
-          <y>10</y>
-          <width>72</width>
-          <height>15</height>
+          <x>660</x>
+          <y>3</y>
+          <width>101</width>
+          <height>41</height>
          </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">font: 14pt &quot;微软雅黑&quot;;</string>
         </property>
         <property name="text">
          <string>消息栏</string>
@@ -280,65 +392,86 @@
        <widget class="QLabel" name="labelPR_tab1_2">
         <property name="geometry">
          <rect>
-          <x>250</x>
+          <x>220</x>
           <y>30</y>
           <width>81</width>
           <height>41</height>
          </rect>
         </property>
+        <property name="font">
+         <font>
+          <family>微软雅黑</family>
+          <pointsize>14</pointsize>
+          <weight>50</weight>
+          <italic>false</italic>
+          <bold>false</bold>
+         </font>
+        </property>
         <property name="text">
-         <string>峰值比</string>
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;峰值比&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+        <property name="textFormat">
+         <enum>Qt::AutoText</enum>
         </property>
        </widget>
        <widget class="QLineEdit" name="lineEditPR_tab1_2">
         <property name="geometry">
          <rect>
           <x>360</x>
-          <y>35</y>
+          <y>30</y>
           <width>100</width>
-          <height>30</height>
+          <height>40</height>
          </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>微软雅黑</family>
+          <pointsize>14</pointsize>
+          <weight>50</weight>
+          <italic>false</italic>
+          <bold>false</bold>
+         </font>
         </property>
        </widget>
        <widget class="QLineEdit" name="lineEditAC_tab1_2">
         <property name="geometry">
          <rect>
           <x>360</x>
-          <y>85</y>
+          <y>80</y>
           <width>100</width>
-          <height>30</height>
+          <height>40</height>
          </rect>
         </property>
        </widget>
        <widget class="QLabel" name="labelAC_tab1_2">
         <property name="geometry">
          <rect>
-          <x>250</x>
+          <x>220</x>
           <y>80</y>
-          <width>81</width>
+          <width>101</width>
           <height>41</height>
          </rect>
         </property>
         <property name="text">
-         <string>酒精度数</string>
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;酒精度数&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
        </widget>
        <widget class="QLineEdit" name="lineEditAmount_tab1_3">
         <property name="geometry">
          <rect>
           <x>360</x>
-          <y>135</y>
+          <y>130</y>
           <width>100</width>
-          <height>30</height>
+          <height>40</height>
          </rect>
         </property>
        </widget>
-       <widget class="QLabel" name="labelInterval_tab1_2">
+       <widget class="QLabel" name="labelInterval_tab1_3">
         <property name="geometry">
          <rect>
-          <x>250</x>
+          <x>220</x>
           <y>180</y>
-          <width>81</width>
+          <width>121</width>
           <height>41</height>
          </rect>
         </property>
@@ -346,25 +479,25 @@
          <string notr="true">font: 10pt &quot;微软雅黑&quot;;</string>
         </property>
         <property name="text">
-         <string>采集间隔(s)</string>
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;采集间隔(s)&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
        </widget>
        <widget class="QLineEdit" name="lineEditInterval_tab1_3">
         <property name="geometry">
          <rect>
           <x>360</x>
-          <y>185</y>
+          <y>180</y>
           <width>100</width>
-          <height>30</height>
+          <height>40</height>
          </rect>
         </property>
        </widget>
-       <widget class="QLabel" name="labelAmount_tab1_2">
+       <widget class="QLabel" name="labelAmount_tab1_3">
         <property name="geometry">
          <rect>
-          <x>250</x>
+          <x>220</x>
           <y>130</y>
-          <width>81</width>
+          <width>101</width>
           <height>41</height>
          </rect>
         </property>
@@ -372,9 +505,65 @@
          <string notr="true">font: 10pt &quot;微软雅黑&quot;;</string>
         </property>
         <property name="text">
-         <string>采集数量</string>
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;采集数量&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
        </widget>
+       <widget class="QLabel" name="label_9">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="geometry">
+         <rect>
+          <x>490</x>
+          <y>260</y>
+          <width>431</width>
+          <height>341</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap>picture/line.png</pixmap>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_10">
+        <property name="geometry">
+         <rect>
+          <x>40</x>
+          <y>260</y>
+          <width>431</width>
+          <height>341</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap>picture/line.png</pixmap>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <zorder>labelSpectrum_tab1_2</zorder>
+       <zorder>labelCamera_tab1_2</zorder>
+       <zorder>frameSpectrum_tab1_2</zorder>
+       <zorder>pushButtonStart_tab1_2</zorder>
+       <zorder>labelTB_tab1_2</zorder>
+       <zorder>labelPR_tab1_2</zorder>
+       <zorder>lineEditPR_tab1_2</zorder>
+       <zorder>lineEditAC_tab1_2</zorder>
+       <zorder>labelAC_tab1_2</zorder>
+       <zorder>lineEditAmount_tab1_3</zorder>
+       <zorder>labelInterval_tab1_3</zorder>
+       <zorder>lineEditInterval_tab1_3</zorder>
+       <zorder>labelAmount_tab1_3</zorder>
+       <zorder>label_10</zorder>
+       <zorder>label_9</zorder>
       </widget>
      </widget>
      <widget class="QFrame" name="frameCamera_tab1_1">
@@ -392,33 +581,9 @@
       <property name="frameShadow">
        <enum>QFrame::Raised</enum>
       </property>
-      <widget class="QLabel" name="labelCamera1">
-       <property name="geometry">
-        <rect>
-         <x>0</x>
-         <y>0</y>
-         <width>427</width>
-         <height>342</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
      </widget>
-     <widget class="QPushButton" name="pushButtonClear">
-      <property name="geometry">
-       <rect>
-        <x>750</x>
-        <y>35</y>
-        <width>51</width>
-        <height>28</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>清空</string>
-      </property>
-     </widget>
+     <zorder>frameCamera_tab1_1</zorder>
+     <zorder>tabWidget2</zorder>
     </widget>
     <widget class="QWidget" name="tab2">
      <attribute name="title">
@@ -428,13 +593,13 @@
       <property name="geometry">
        <rect>
         <x>30</x>
-        <y>30</y>
-        <width>111</width>
+        <y>35</y>
+        <width>160</width>
         <height>31</height>
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">font: 10pt &quot;微软雅黑&quot;;</string>
+       <string notr="true">font: 14pt &quot;微软雅黑&quot;;</string>
       </property>
       <property name="text">
        <string>当前曝光时间</string>
@@ -443,20 +608,20 @@
      <widget class="QLineEdit" name="lineEditExposureTime">
       <property name="geometry">
        <rect>
-        <x>160</x>
+        <x>200</x>
         <y>30</y>
-        <width>113</width>
-        <height>21</height>
+        <width>160</width>
+        <height>41</height>
        </rect>
       </property>
      </widget>
      <widget class="QLineEdit" name="lineEditGain">
       <property name="geometry">
        <rect>
-        <x>160</x>
+        <x>200</x>
         <y>80</y>
-        <width>111</width>
-        <height>21</height>
+        <width>160</width>
+        <height>41</height>
        </rect>
       </property>
      </widget>
@@ -464,13 +629,13 @@
       <property name="geometry">
        <rect>
         <x>30</x>
-        <y>70</y>
-        <width>111</width>
-        <height>31</height>
+        <y>80</y>
+        <width>160</width>
+        <height>41</height>
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">font: 10pt &quot;微软雅黑&quot;;</string>
+       <string notr="true">font: 14pt &quot;微软雅黑&quot;;</string>
       </property>
       <property name="text">
        <string>当前相机增益</string>
@@ -479,10 +644,10 @@
      <widget class="QLabel" name="labelTB_tab1_4">
       <property name="geometry">
        <rect>
-        <x>690</x>
-        <y>40</y>
-        <width>72</width>
-        <height>21</height>
+        <x>670</x>
+        <y>42</y>
+        <width>101</width>
+        <height>41</height>
        </rect>
       </property>
       <property name="text">
@@ -495,20 +660,26 @@
     <property name="geometry">
      <rect>
       <x>540</x>
-      <y>120</y>
-      <width>400</width>
-      <height>200</height>
+      <y>135</y>
+      <width>401</width>
+      <height>181</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 14pt &quot;微软雅黑&quot;;</string>
     </property>
    </widget>
    <widget class="QPushButton" name="pushButtonRe">
     <property name="geometry">
      <rect>
-      <x>220</x>
-      <y>24</y>
-      <width>81</width>
-      <height>28</height>
+      <x>270</x>
+      <y>18</y>
+      <width>120</width>
+      <height>41</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 14pt &quot;微软雅黑&quot;;</string>
     </property>
     <property name="text">
      <string>打开设备</string>
@@ -517,11 +688,14 @@
    <widget class="QPushButton" name="pushButtonGetimage_tab1_1">
     <property name="geometry">
      <rect>
-      <x>300</x>
-      <y>24</y>
-      <width>81</width>
-      <height>28</height>
+      <x>400</x>
+      <y>18</y>
+      <width>120</width>
+      <height>41</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 14pt &quot;微软雅黑&quot;;</string>
     </property>
     <property name="text">
      <string>获取图像</string>
@@ -530,16 +704,159 @@
    <widget class="QPushButton" name="pushButtonGetimageStop_tab1_1">
     <property name="geometry">
      <rect>
-      <x>380</x>
-      <y>24</y>
-      <width>81</width>
-      <height>28</height>
+      <x>530</x>
+      <y>18</y>
+      <width>120</width>
+      <height>41</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 14pt &quot;微软雅黑&quot;;</string>
     </property>
     <property name="text">
      <string>停止图像</string>
     </property>
    </widget>
+   <widget class="QPushButton" name="pushButtonClear">
+    <property name="geometry">
+     <rect>
+      <x>780</x>
+      <y>95</y>
+      <width>61</width>
+      <height>40</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 14pt &quot;微软雅黑&quot;;
+</string>
+    </property>
+    <property name="text">
+     <string>清空</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>880</x>
+      <y>-3</y>
+      <width>153</width>
+      <height>144</height>
+     </rect>
+    </property>
+    <property name="autoFillBackground">
+     <bool>false</bool>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap>picture/xiaohui.png</pixmap>
+    </property>
+    <property name="scaledContents">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>1024</width>
+      <height>740</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap>picture/line.png</pixmap>
+    </property>
+    <property name="scaledContents">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_3">
+    <property name="geometry">
+     <rect>
+      <x>400</x>
+      <y>700</y>
+      <width>221</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap>picture/3.png</pixmap>
+    </property>
+    <property name="scaledContents">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_4">
+    <property name="geometry">
+     <rect>
+      <x>538</x>
+      <y>132</y>
+      <width>410</width>
+      <height>190</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap>picture/line.png</pixmap>
+    </property>
+    <property name="scaledContents">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_5">
+    <property name="geometry">
+     <rect>
+      <x>620</x>
+      <y>710</y>
+      <width>401</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap>picture/4.png</pixmap>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_6">
+    <property name="geometry">
+     <rect>
+      <x>5</x>
+      <y>710</y>
+      <width>401</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap>picture/4.png</pixmap>
+    </property>
+   </widget>
+   <zorder>label_2</zorder>
+   <zorder>tabWidget</zorder>
+   <zorder>pushButtonRe</zorder>
+   <zorder>pushButtonGetimage_tab1_1</zorder>
+   <zorder>pushButtonGetimageStop_tab1_1</zorder>
+   <zorder>pushButtonClear</zorder>
+   <zorder>label_5</zorder>
+   <zorder>label_6</zorder>
+   <zorder>label_4</zorder>
+   <zorder>textBrowser_tab1</zorder>
+   <zorder>label</zorder>
+   <zorder>label_3</zorder>
   </widget>
  </widget>
  <resources/>
