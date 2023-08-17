@@ -1,14 +1,13 @@
 import io
 
-from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5 import QtGui, QtWidgets
 import sys
 import cv2
 from scipy.signal import find_peaks
 from scipy.optimize import fsolve
-import gxipy as gx
 import numpy as np
 import matplotlib.pyplot as plt
-import MyWindow
+from res import MyWindow, gxipy as gx
 
 
 class Detector(MyWindow.Ui_MainWindow):
@@ -76,9 +75,9 @@ class Detector(MyWindow.Ui_MainWindow):
         self.cam = self.device_manager.open_device_by_index(str_index)  # 打开设备
         # 默认触发方式为连续采集，设置默认曝光时间为10000us，增益0
         self.cam.TriggerMode.set(gx.GxSwitchEntry.OFF)
-        self.cam.ExposureTime.set(10000)  # 默认曝光时间10000us
+        self.cam.ExposureTime.set(400000)  # 默认曝光时间400000us
         self.cam.Gain.set(0)
-        self.textBrowser_tab1.append('已经默认设置为连续采集模式，曝光时间为10000us')
+        self.textBrowser_tab1.append('已经默认设置为连续采集模式，曝光时间为400000us')
 
         # 显示默认曝光时间
         exposuretime_value = self.cam.ExposureTime.get()
@@ -180,11 +179,11 @@ class Detector(MyWindow.Ui_MainWindow):
         if len(peakloc) < 2:
             self.textBrowser_tab1.append("此时只有一个水峰\n")
             return
-        # 酒精峰，靠近405的那个(根据当前摆放在右侧)
+        # 酒精峰，靠近405的那个(根据当前摆放在左侧)
         # 此时获取的是一个元素，而不是数值
-        peak_a = y[peakloc[1]]
+        peak_a = y[peakloc[0]]
         # 水峰
-        peak_w = y[peakloc[0]]
+        peak_w = y[peakloc[1]]
         if abs(peak_w) < 1e-10:  # 使用很小的阈值来判断 peak_w 是否接近于零
             self.textBrowser_tab1.append("警告：水峰的值接近于零，无法进行除法计算\n")
             self.lineEditPR_tab1_1.setText('存在错误')
@@ -204,7 +203,9 @@ class Detector(MyWindow.Ui_MainWindow):
             return
         # 根据bizhi进行计算,定义计算式
         def equation(x):
-            return 0.4336*np.exp(0.0229*x)-bizhi
+            return 0.3767 * np.exp(0.0266 * x) - bizhi  # 折光仪0~60,40以下相对准确。
+            # return 0.3323*np.exp(0.0302*x)-bizhi  #(0-80)
+            # return 0.3352 * np.exp(0.0301 * x) - bizhi
         solution = fsolve(equation,50.0)
         format_solution = "{:.2f}".format(solution[0])
         self.lineEditAC_tab1_1.setText(str(format_solution))
